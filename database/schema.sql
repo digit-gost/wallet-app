@@ -1,14 +1,5 @@
--- =========================
--- DATABASE
--- =========================
 CREATE DATABASE wallet_app;
 
--- Connecte-toi ensuite à la base :
--- \c wallet_app;
-
--- =========================
--- TABLE WALLETS
--- =========================
 CREATE TABLE wallets (
     id SERIAL PRIMARY KEY,
     code VARCHAR(50) UNIQUE NOT NULL,
@@ -19,9 +10,6 @@ CREATE TABLE wallets (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- =========================
--- TABLE TRANSACTIONS
--- =========================
 CREATE TABLE transactions (
     id SERIAL PRIMARY KEY,
     wallet_code VARCHAR(50) NOT NULL,
@@ -37,18 +25,12 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
--- =========================
--- FOREIGN KEY (OPTIONNEL MAIS RECOMMANDÉ)
--- =========================
 ALTER TABLE transactions
 ADD CONSTRAINT fk_wallet
 FOREIGN KEY (wallet_code)
 REFERENCES wallets(code)
 ON DELETE CASCADE;
 
--- =========================
--- DONNÉE TEST (OPTIONNEL)
--- =========================
 INSERT INTO wallets (code, nom, prenom, telephone, solde)
 VALUES ('W001', 'SANKHARE', 'Baye', '770000000', 10000);
 
